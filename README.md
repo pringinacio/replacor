@@ -1,9 +1,7 @@
 [![CodeQL](https://github.com/megamanics/replacor/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/megamanics/replacor/actions/workflows/codeql-analysis.yml)
 [![ESLint analysis](https://github.com/megamanics/replacor/actions/workflows/eslint.yml/badge.svg)](https://github.com/megamanics/replacor/actions/workflows/eslint.yml)
 
-[![OpenSSF Scorecard]
-(https://api.securityscorecards.dev/projects/github.com/megamanics/replacor/badge)]
-(https://api.securityscorecards.dev/projects/github.com/megamanics/replacor)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/megamanics/replacor/badge)](https://api.securityscorecards.dev/projects/github.com/megamanics/replacor)
 
 # Pre-Reqs for this
 
