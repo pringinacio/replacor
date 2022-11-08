@@ -6,7 +6,7 @@
   "dependencies": {
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
     "colors": "latest",
-    "commander": "^9.4.0",
+    "commander": "^9.4.1",
     "diff": "latest",
     "dotenv": "^16.0.3",
     "log4js": "^6.7.0",
