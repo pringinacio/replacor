@@ -18,8 +18,11 @@ jobs:
         uses: dependabot/fetch-metadata@v1.1.1
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-      - name: debug
-        uses: devops-testbed/intake/debug@main
+      #- name: debug
+      #  uses: devops-testbed/intake/debug@main
+      - name: Dump steps context
+        run: echo '${{ toJSON(steps) }}'
+        shell: bash 
       - name: Enable auto-merge for Dependabot PRs
         if: ${{contains(steps.metadata.outputs.dependency-names, 'my-dependency') && steps.metadata.outputs.update-type == 'version-update:semver-patch'}}
         run: gh pr merge --auto --merge "$PR_URL"
