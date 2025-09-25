@@ -134,7 +134,7 @@ async function replaceInConfluence() {
         console.log("No changes performed since running in DRYRUN!");
       }
       else {
-        await updateContent(element.id, element.version + 1, element.type, titleReplaced, JSON.stringify(replacedContent));
+        element.updated = await updateContent(element.id, element.version + 1, element.type, titleReplaced, JSON.stringify(replacedContent));
       }
     }
   }
@@ -240,8 +240,10 @@ function searchReplace() {
     console.table(hm, ["id", "type", "url", "title", "space"])
 
     replaceInConfluence().then(ignored => {
-                               console.log("Check the following to see what was changed")
-                               console.table(hm, ["id", "type", "url", "title", "space", "updated"])
+                               if (find != null && replace != null) {
+                                 console.log("Check the following to see what was changed")
+                                 console.table(hm, ["id", "type", "url", "title", "space", "updated"])
+                               }
                            });
   });
 }
@@ -253,15 +255,15 @@ function prepare() {
   const options = new Command()
     .name('search.js')
     .description('CLI to search Confluence Pages')
-    .version('0.0.1')
+    .version('1.0.0')
     .requiredOption('-q, --query <query>', 'CQL query to search for, eg: space = XXX')
     .requiredOption('-u, --user  <user>', 'user eg: your_email@domain.com')
-    .requiredOption('-t, --token <token>', 'your_user_api_token with scope read:content-details:confluence,write:content:confluence')
+    .requiredOption('-t, --token <token>', 'your_user_api_token with scope read:content-details:confluence,write:content:confluence. If possible use a classic token to avoid problems when using in older APIs.')
     .requiredOption('-d, --domain <domainurl>', 'eg: https://<domain_name>.atlassian.net')
     .requiredOption('-s, --search <CQL Search term>', 'eg: term to search in CQL')
     .option('--debug', 'add extra debugging output')
     .option("-r, --replace  <string>", "replacement string eg: gitlab -> github")
-    .option("-f, --find  <string>", "string to search and replace eg: gitlab")
+    .requiredOption("-f, --find  <string>", "string to search and replace eg: gitlab")
     .option("--dryrun", "dry run only")
     .parse()
     .opts()
@@ -286,9 +288,7 @@ function prepare() {
       .toString('base64')
   }
 
-  console.info({
-    searchQuery
-  })
+  console.info({searchQuery})
 }
 
 prepare();
