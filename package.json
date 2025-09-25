@@ -4,21 +4,21 @@
     "replace": "replace.js"
   },
   "dependencies": {
-    "@microsoft/eslint-formatter-sarif": "^3.0.0",
+    "@microsoft/eslint-formatter-sarif": "3.0.0",
     "colors": "latest",
-    "commander": "^9.4.1",
+    "commander": "9.4.1",
     "diff": "latest",
-    "dotenv": "^16.0.3",
-    "log4js": "^6.7.0",
-    "nacl": "^0.1.3",
+    "dotenv": "16.0.3",
+    "log4js": "6.7.0",
+    "nacl": "0.1.3",
     "node-fetch": "latest"
   },
   "devDependencies": {
-    "eslint": "^8.27.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.3.0",
-    "eslint-plugin-promise": "^6.0.1",
-    "prettier": "^2.7.1"
+    "eslint": "8.27.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.3.0",
+    "eslint-plugin-promise": "6.0.1",
+    "prettier": "2.7.1"
   }
 }
