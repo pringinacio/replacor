@@ -30,8 +30,8 @@ Options:
 -d, --domain <domainurl>        eg: https://<domain_name>.atlassian.net
 -s, --search <CQL Search term>  eg: term to search in CQL
 --debug                         add extra debugging output
--r, --replace  <string>         replacement string eg: gitlab -> github
--f, --find  <string>            string to search and replace eg: gitlab
+-r, --replace  <string>         replacement string eg: gitlab -> github.
+-f, --find  <string>            string to search and replace eg: gitlab.
 --dryrun                        dry run only
 -h, --help                      display help for command
 ```
@@ -123,7 +123,7 @@ Check the following to see what was changed
 └─────────┴─────────────┴────────┴──────────────────────────────────────────────┴─────────────────────────────────────────────────────┴───────────────────────┴─────────┘
 ```
 
-# Caviats
+# Caveats
 
 If _404_ errors appear when updating (replacing), they can have several meanings:
 - The page that was deleted in the meanwhile

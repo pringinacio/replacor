@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import {Command} from 'commander'
 import {diffWordsWithSpace} from "diff";
 import colors from "colors";
+import readlineSync from 'readline-sync';
 
 let user;
 let token;
@@ -19,7 +20,8 @@ let header;
 const hm = [];
 
 function replaceString(content) {
-  const regex = new RegExp(find, "g");
+
+  const regex = new RegExp(RegExp.escape(find), "g");
 
   return content.replace(regex, replace);
 }
@@ -134,6 +136,9 @@ async function replaceInConfluence() {
         console.log("No changes performed since running in DRYRUN!");
       }
       else {
+        // Life saviour if need
+        // readlineSync.question('Changing page wit id: ' + element.id + '. Press a key to continue.');
+
         element.updated = await updateContent(element.id, element.version + 1, element.type, titleReplaced, JSON.stringify(replacedContent));
       }
     }
@@ -158,7 +163,7 @@ function handleSearchResponse(json) {
 
   if (json.results != null) {
     json.results.forEach(result => {
-      const regex = new RegExp(find, "g");
+      const regex = new RegExp(RegExp.escape(find), "g");
 
       if (debug) {
         console.debug(result)
@@ -262,8 +267,8 @@ function prepare() {
     .requiredOption('-d, --domain <domainurl>', 'eg: https://<domain_name>.atlassian.net')
     .requiredOption('-s, --search <CQL Search term>', 'eg: term to search in CQL')
     .option('--debug', 'add extra debugging output')
-    .option("-r, --replace  <string>", "replacement string eg: gitlab -> github")
-    .requiredOption("-f, --find  <string>", "string to search and replace eg: gitlab")
+    .option("-r, --replace  <string>", "replacement string eg: gitlab -> github.")
+    .requiredOption("-f, --find  <string>", "string to search and replace eg: gitlab.")
     .option("--dryrun", "dry run only")
     .parse()
     .opts()
@@ -281,7 +286,7 @@ function prepare() {
   replace = options.replace
   find = options.find
   dryrun = options.dryrun
-  searchQuery = domain + '/wiki/rest/api/content/search?cql=' + query + ' and siteSearch~"' + search + '"&expand=body.storage,version.number'
+  searchQuery = domain + '/wiki/rest/api/content/search?cql=' + query + '%20and%20siteSearch~%22' + search + '%22&expand=body.storage,version.number'
   header = {
     'Content-Type': 'application/json',
     Authorization: 'Basic ' + Buffer.from(user + ':' + token)
