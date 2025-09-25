@@ -59,8 +59,6 @@ Example to search a URL "example-1.com".
 example%5C-1.com
 ```
 
-
-
 ## Examples of execution
 
 ### Search only
@@ -78,14 +76,14 @@ FIND_STR=example-1.com
 ```
 
 Will process all results and return something similar to:
-
+```
 ┌─────────┬─────────────┬────────┬──────────────────────────────────────────────┬─────────────────────────────────────────────────────┬───────────────────────┐
 │ (index) │ id          │ type   │ url                                          │ title                                               │ space                 │
 ├─────────┼─────────────┼────────┼──────────────────────────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────┤
 │ 0       │ '111111111' │ 'page' │ 'https://mydomain.atlassian.net/wiki/x/QYCQ' │ 'Title one - Best one before two'                   │ '/rest/api/space/DEV' │
 │ 1       │ '222222222' │ 'page' │ 'https://mydomain.atlassian.net/wiki/x/x4Dg' │ 'Second title - Not the first one. Maybe the ONE'   │ '/rest/api/space/DEV' │
 └─────────┴─────────────┴────────┴──────────────────────────────────────────────┴─────────────────────────────────────────────────────┴───────────────────────┘
-
+```
 ### Search and Replace
 
 It is enough to add the _-r_ flag to activate the replace.
@@ -105,6 +103,8 @@ SUBS_STR=new.example.com
 
 Will process all results and return something similar to:
 
+The following results were found
+```
 ┌─────────┬─────────────┬────────┬──────────────────────────────────────────────┬─────────────────────────────────────────────────────┬───────────────────────┐
 │ (index) │ id          │ type   │ url                                          │ title                                               │ space                 │
 ├─────────┼─────────────┼────────┼──────────────────────────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────┤
@@ -112,6 +112,23 @@ Will process all results and return something similar to:
 │ 1       │ '222222222' │ 'page' │ 'https://mydomain.atlassian.net/wiki/x/x4Dg' │ 'Second title - Not the first one. Maybe the ONE'   │ '/rest/api/space/DEV' │
 └─────────┴─────────────┴────────┴──────────────────────────────────────────────┴─────────────────────────────────────────────────────┴───────────────────────┘
 
+Proceeding to replace.
+Check the following to see what was changed
+
+┌─────────┬─────────────┬────────┬──────────────────────────────────────────────┬─────────────────────────────────────────────────────┬─────────────────────────────────┐
+│ (index) │ id          │ type   │ url                                          │ title                                               │ space                 │ updated │
+├─────────┼─────────────┼────────┼──────────────────────────────────────────────┼─────────────────────────────────────────────────────┼─────────────────────────────────┤
+│ 0       │ '111111111' │ 'page' │ 'https://mydomain.atlassian.net/wiki/x/QYCQ' │ 'Title one - Best one before two'                   │ '/rest/api/space/DEV' │  true   │
+│ 1       │ '222222222' │ 'page' │ 'https://mydomain.atlassian.net/wiki/x/x4Dg' │ 'Second title - Not the first one. Maybe the ONE'   │ '/rest/api/space/DEV' │  false  │
+└─────────┴─────────────┴────────┴──────────────────────────────────────────────┴─────────────────────────────────────────────────────┴───────────────────────┴─────────┘
+```
+
+# Caviats
+
+If _404_ errors appear when updating (replacing), they can have several meanings:
+- The page that was deleted in the meanwhile
+- The user that is executing the script does not have permissions to edit the page
+- The token being use does not have permission to update pages
 
 
 # Reference
